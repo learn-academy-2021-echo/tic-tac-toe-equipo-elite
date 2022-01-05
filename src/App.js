@@ -14,10 +14,7 @@ class App extends Component {
     }
   }
 
-  // handleClick = (index) => {
-  //   this.handleGamePlay(index)
-  //   this.winnerChecker()
-  // }
+
 
   handleGamePlay = (index) => {
     const { squares } = this.state;
@@ -26,63 +23,60 @@ class App extends Component {
       squares[index] = "❌"
       this.setState({
         playerOne: [...this.state.playerOne, index].sort((a, b) => a - b),
-        playerState: 1
       })
     }
     else if (this.state.playerState === 1) {
       squares[index] = "⭕️"
       this.setState({
         playerTwo: [...this.state.playerTwo, index].sort((a, b) => a - b),
-        playerState: 0
       })
     }
     this.setState({ squares: squares })
 
   }
 
+  changePlayerState = () => {
 
-
-  winnerChecker = (playerState) => {
-    if (playerState === 1) {
-      if ([0, 1, 2].toString() === this.state.playerTwo.toString()) {
-        this.setState({ winner: true })
-        alert('you won player 2')
-      }
-
-    }
-    else if (playerState === 0) {
-      if ([0, 1, 2].toString() === this.state.playerOne.toString()) {
-        this.setState({ winner: true })
-        alert('you won player 1')
-      }
-
+    if(this.state.playerState === 0){
+      this.setState({playerState: 1})
+    } 
+    else if(this.state.playerState === 1){
+      this.setState({playerState: 0})
     }
   }
 
-  // else if () { }
-  // else if () { }
-  // else if () { }
-  // else if () { }
-  // else if () { }
-  // else if () { }
-  // else if () { }
+  winnerChecker = (playerState) => {
+
+    if (playerState === 0) {
+      if ([0, 1, 2].toString() === this.state.playerOne.toString()|| 
+      [3,4,5].toString() === this.state.playerOne.toString() || 
+      [6,7,8].toString() === this.state.playerOne.toString() || 
+      [0,3,6].toString() === this.state.playerOne.toString() || 
+      [1,4,7].toString() === this.state.playerOne.toString() ||  
+      [2,5,8].toString() === this.state.playerOne.toString() ||
+      [0,4,8].toString() === this.state.playerOne.toString() ||
+      [2,4,6].toString() === this.state.playerOne.toString())
+      {
+        this.setState({ winner: true })
+        alert('you won player 1')
+      }
+    }
+    else if ([0, 1, 2].toString() === this.state.playerTwo.toString()|| 
+      [3,4,5].toString() === this.state.playerTwo.toString() || 
+      [6,7,8].toString() === this.state.playerTwo.toString() || 
+      [0,3,6].toString() === this.state.playerTwo.toString() || 
+      [1,4,7].toString() === this.state.playerTwo.toString() ||  
+      [2,5,8].toString() === this.state.playerTwo.toString() ||
+      [0,4,8].toString() === this.state.playerTwo.toString() ||
+      [2,4,6].toString() === this.state.playerTwo.toString())
+      {
+        this.setState({ winner: true })
+        alert('you won player 2')
+      }
+  }
 
 
 
-  //[0, 1, 2]
-  //[3, 4, 5]
-  //[6, 7, 8]
-
-  //1. 0,1,2
-  //2. 3,4,5
-  //3. 6,7,8
-  //4. 0,3,6
-  //5. 1,4,7
-  //6. 2,5,8
-  //7. 0,4,8
-  //8. 2,4,6
-  //Create an array for each player
-  //Check for possible solutions - combo
 
   render() {
 
@@ -99,6 +93,7 @@ class App extends Component {
               key={index}
               value={value}
               playerState={this.state.playerState}
+              changePlayerState={this.changePlayerState}
             />)
           })}
         </div>
