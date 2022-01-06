@@ -16,10 +16,12 @@
 h1{
   text-align: center;
   font-size:x-large;
+  color:white;
 }
 
 h2{
   text-align: center;
+  color: white;
 }
 
 .reset-button{

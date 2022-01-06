@@ -16,11 +16,9 @@ class App extends Component {
 
 
 
-  //State that will update and track changes 
-  /*Set up the logic for the board game by creating and updating*/
-  handleGamePlay = (index) => {
-    this.winnerChecker(this.state.playerState)
 
+
+  handleGamePlay = (index) => {
 
     const { squares } = this.state;
     if (squares[index] === "❌" || squares[index] === "⭕️") {
@@ -49,10 +47,12 @@ class App extends Component {
       this.setState({ squares: squares })
     }
 
-    this.draw()
-    this.changePlayerState()
 
+    setTimeout(() => { this.draw() }, 100)
+    setTimeout(() => { this.changePlayerState() }, 5)
+    setTimeout(() => { this.winnerChecker(this.state.playerState) }, 10);
   }
+
 
 
   //Changes the player turn
@@ -68,7 +68,6 @@ class App extends Component {
 
   //Checks for a winner or a draw 
   winnerChecker = (playerState) => {
-
     if (playerState === 0 && this.state.playerOne.length + this.state.playerTwo.length !== 9) {
       let player1 = this.state.playerOne
       if (player1.includes(0) && player1.includes(1) && player1.includes(2)) {
@@ -158,9 +157,8 @@ class App extends Component {
   }
 
   draw = () => {
-    this.winnerChecker()
+    // this.winnerChecker()
     let drawArray = [...this.state.squares].filter(value => value === "🤯")
-    console.log(drawArray)
     if (drawArray.length === 0) {
       alert('We have a draw')
     }
@@ -206,6 +204,3 @@ class App extends Component {
 }
 export default App
 
-// await this.props.winnerChecker(this.props.playerState)
-// await this.props.changePlayerState()
-// await this.props.draw()
