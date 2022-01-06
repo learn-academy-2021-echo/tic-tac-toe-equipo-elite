@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 class Square extends Component {
 
-  handleClick = async () => {
-    await this.props.handleGamePlay(this.props.index)
-    await this.props.winnerChecker(this.props.playerState)
-    await this.props.changePlayerState()
+  handleClick = () => {
+    this.props.handleGamePlay(this.props.index)
+    // await this.props.winnerChecker(this.props.playerState)
+    // await this.props.changePlayerState()
+    // await this.props.draw()
   }
 
 

@@ -16,7 +16,12 @@ class App extends Component {
 
 
 
+  //State that will update and track changes 
+  /*Set up the logic for the board game by creating and updating*/
   handleGamePlay = (index) => {
+    this.winnerChecker(this.state.playerState)
+
+
     const { squares } = this.state;
     if (squares[index] === "❌" || squares[index] === "⭕️") {
       alert("Pick Another Square!!!")
@@ -30,21 +35,27 @@ class App extends Component {
     else {
       if (this.state.playerState === 0) {
         squares[index] = "❌"
+
         this.setState({
-          playerOne: [...this.state.playerOne, index].sort((a, b) => a - b),
+          playerOne: [...this.state.playerOne, index]
         })
       }
       else if (this.state.playerState === 1) {
         squares[index] = "⭕️"
         this.setState({
-          playerTwo: [...this.state.playerTwo, index].sort((a, b) => a - b),
+          playerTwo: [...this.state.playerTwo, index]
         })
       }
       this.setState({ squares: squares })
     }
 
+    this.draw()
+    this.changePlayerState()
+
   }
 
+
+  //Changes the player turn
   changePlayerState = () => {
 
     if (this.state.playerState === 0) {
@@ -55,48 +66,106 @@ class App extends Component {
     }
   }
 
+  //Checks for a winner or a draw 
   winnerChecker = (playerState) => {
 
-    let arrayOfHeads = this.state.squares.filter(value => value === "🤯" && true)
-    console.log(this.state.playerOne.length + this.state.playerTwo.length)
-    console.log(arrayOfHeads.length)
-
-    if (playerState === 0) {
-      if (this.state.playerOne.toString().indexOf([0, 1, 2].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([3, 4, 5].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([6, 7, 8].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([0, 3, 6].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([1, 4, 7].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([2, 5, 8].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([0, 4, 8].toString()) !== -1 ||
-        this.state.playerOne.toString().indexOf([2, 4, 6].toString()) !== -1) {
+    if (playerState === 0 && this.state.playerOne.length + this.state.playerTwo.length !== 9) {
+      let player1 = this.state.playerOne
+      if (player1.includes(0) && player1.includes(1) && player1.includes(2)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(3) && player1.includes(4) && player1.includes(5)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(6) && player1.includes(7) && player1.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(0) && player1.includes(3) && player1.includes(6)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(1) && player1.includes(4) && player1.includes(7)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(2) && player1.includes(5) && player1.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(0) && player1.includes(4) && player1.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 1')
+        this.reset()
+      }
+      else if (player1.includes(2) && player1.includes(4) && player1.includes(6)) {
         this.setState({ winner: true })
         alert('you won player 1')
         this.reset()
       }
     }
-    else if (playerState === 1) {
-      if ([0, 1, 2].toString() === this.state.playerTwo.toString() ||
-        [3, 4, 5].toString() === this.state.playerTwo.toString() ||
-        [6, 7, 8].toString() === this.state.playerTwo.toString() ||
-        [0, 3, 6].toString() === this.state.playerTwo.toString() ||
-        [1, 4, 7].toString() === this.state.playerTwo.toString() ||
-        [2, 5, 8].toString() === this.state.playerTwo.toString() ||
-        [0, 4, 8].toString() === this.state.playerTwo.toString() ||
-        [2, 4, 6].toString() === this.state.playerTwo.toString()) {
+    else if (playerState === 1 && this.state.playerOne.length + this.state.playerTwo.length !== 9) {
+      let player2 = this.state.playerTwo
+      if (player2.includes(0) && player2.includes(1) && player2.includes(2)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(3) && player2.includes(4) && player2.includes(5)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(6) && player2.includes(7) && player2.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(0) && player2.includes(3) && player2.includes(6)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(1) && player2.includes(4) && player2.includes(7)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(2) && player2.includes(5) && player2.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(0) && player2.includes(4) && player2.includes(8)) {
+        this.setState({ winner: true })
+        alert('you won player 2')
+        this.reset()
+      }
+      else if (player2.includes(2) && player2.includes(4) && player2.includes(6)) {
         this.setState({ winner: true })
         alert('you won player 2')
         this.reset()
       }
     }
-    // else { console.log("Im here") }
+  }
 
-    if (this.state.playerOne.length + this.state.playerTwo.length === 9) {
-      console.log("we have a draw")
+  draw = () => {
+    this.winnerChecker()
+    let drawArray = [...this.state.squares].filter(value => value === "🤯")
+    console.log(drawArray)
+    if (drawArray.length === 0) {
       alert('We have a draw')
-      this.reset()
     }
   }
+
 
   reset = () => {
     this.setState({
@@ -122,6 +191,7 @@ class App extends Component {
             return (<Square
               handleGamePlay={this.handleGamePlay}
               winnerChecker={this.winnerChecker}
+              draw={this.draw}
               index={index}
               key={index}
               value={value}
@@ -135,3 +205,7 @@ class App extends Component {
   }
 }
 export default App
+
+// await this.props.winnerChecker(this.props.playerState)
+// await this.props.changePlayerState()
+// await this.props.draw()
