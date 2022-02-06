@@ -19,7 +19,7 @@ class App extends Component {
   //State that will update and track changes 
   /*Set up the logic for the board game by creating and updating*/
   handleGamePlay = (index) => {
-    this.winnerChecker(this.state.playerState)
+    
 
 
     const { squares } = this.state;
@@ -49,6 +49,7 @@ class App extends Component {
       this.setState({ squares: squares })
     }
 
+    this.winnerChecker(this.state.playerState)
     this.draw()
     this.changePlayerState()
 
@@ -158,7 +159,7 @@ class App extends Component {
   }
 
   draw = () => {
-    this.winnerChecker()
+    // this.winnerChecker()
     let drawArray = [...this.state.squares].filter(value => value === "🤯")
     console.log(drawArray)
     if (drawArray.length === 0) {
